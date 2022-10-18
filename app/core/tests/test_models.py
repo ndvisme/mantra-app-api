@@ -2,6 +2,13 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
+from core import models
+
+
+def create_user(email='user@example.com', password='testpass123'):
+    """Create a return a new user."""
+    return get_user_model().objects.create_user(email, password)
+
 
 class ModelTests(TestCase):
     """Test models."""
@@ -44,3 +51,13 @@ class ModelTests(TestCase):
 
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_create_mantra(self):
+        user = create_user()
+        mantra = models.Mantra.objects.create(
+            user=user,
+            quote="Inner Peace",
+            public=True,
+        )
+
+        self.assertEqual(str(mantra), mantra.quote)
