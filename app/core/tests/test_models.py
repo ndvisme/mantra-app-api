@@ -61,3 +61,7 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(mantra), mantra.quote)
+
+    def test_create_tag(self):
+        user = create_user()
+        tag = models.Tag.objects.create(user=user, name='Mind')

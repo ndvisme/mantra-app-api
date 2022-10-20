@@ -11,6 +11,7 @@ from mantra import views
 
 router = DefaultRouter()
 router.register('mantras', views.MantraViewSet)
+router.register('tags', views.TagViewSet)
 
 app_name = 'mantra'
 
