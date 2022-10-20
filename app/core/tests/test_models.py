@@ -65,3 +65,15 @@ class ModelTests(TestCase):
     def test_create_tag(self):
         user = create_user()
         tag = models.Tag.objects.create(user=user, name='Mind')
+
+    def test_create_playlist(self):
+
+        user = create_user()
+        playlist = models.Playlist.objects.create(
+            user=user,
+            title='Sample playlist title',
+            description='Sample playlist description.',
+            public=False,
+        )
+
+        self.assertEqual(str(playlist), playlist.title)
