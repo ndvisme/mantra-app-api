@@ -51,7 +51,7 @@ class MantraSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
-
+# test
 
 class MantraDetailSerializer(MantraSerializer):
 
