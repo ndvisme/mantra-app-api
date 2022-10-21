@@ -75,6 +75,7 @@ class Playlist(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     public = models.BooleanField(default=False)
+    mantras = models.ManyToManyField(Mantra)
 
     def __str__(self):
         return self.title

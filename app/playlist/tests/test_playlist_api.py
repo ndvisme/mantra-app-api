@@ -25,7 +25,7 @@ def create_playlist(user, **params):
     defaults = {
         'title': 'Sample playlist title',
         'description': 'Sample description',
-        'public': False,
+        'public': False
     }
     defaults.update(params)
 
