@@ -1,0 +1,1011 @@
+{
+	"info": {
+		"_postman_id": "2ab3ed9c-d18c-46e3-8a84-d4e875010002",
+		"name": "Mantra App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17475197"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"{{password}}\",\r\n  \"name\": \"{{name}}\"\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/{{user_path}}/create/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"{{user_path}}",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"Token\", \"Token \" + jsonData.token);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"{{password}}\"\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/{{user_path}}/token/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"{{user_path}}",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Me",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"email\", jsonData.email);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "JM5TenMl6sy4TtgUjuAs5HHgzoEOq7eJJuhZaayRNt3upzbM0jWeAP2zuPogYoz5"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/{{user_path}}/me/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"{{user_path}}",
+								"me",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Partial Update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "JM5TenMl6sy4TtgUjuAs5HHgzoEOq7eJJuhZaayRNt3upzbM0jWeAP2zuPogYoz5"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"string\"\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/{{user_path}}/me/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"{{user_path}}",
+								"me",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Complete Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "JM5TenMl6sy4TtgUjuAs5HHgzoEOq7eJJuhZaayRNt3upzbM0jWeAP2zuPogYoz5"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"user12@example.com\",\r\n    \"password\":\"string\",\r\n    \"name\":\"string\"\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/{{user_path}}/me/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"{{user_path}}",
+								"me",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mantra",
+			"item": [
+				{
+					"name": "Tags",
+					"item": [
+						{
+							"name": "All for current User",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "X-CSRFToken",
+										"value": "f0NdTO93cQFteG0SjeVyoYWdb6tk43V7B8FAJrlzaJ1S8ydI50MjYiAFnopHcRIq"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{Token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://{{base_url_path}}/{{mantra_path}}/tags/",
+									"protocol": "http",
+									"host": [
+										"{{base_url_path}}"
+									],
+									"path": [
+										"{{mantra_path}}",
+										"tags",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Tag on Mantra",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-CSRFToken",
+										"value": "lw5q9pMXeG3C0jhHDiEJqzu7MmGnaPHwHEXNZ2Ytczp1Ubuxp4vu0T8zYECKiDuP"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{Token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"{{tag_soul}}\"\r\n}"
+								},
+								"url": {
+									"raw": "http://{{base_url_path}}/{{mantra_path}}/tags/{{mantra_id}}/",
+									"protocol": "http",
+									"host": [
+										"{{base_url_path}}"
+									],
+									"path": [
+										"{{mantra_path}}",
+										"tags",
+										"{{mantra_id}}",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Tag on Mantra",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-CSRFToken",
+										"value": "lw5q9pMXeG3C0jhHDiEJqzu7MmGnaPHwHEXNZ2Ytczp1Ubuxp4vu0T8zYECKiDuP"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{Token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"{{tag_soul}}\"\r\n}"
+								},
+								"url": {
+									"raw": "http://{{base_url_path}}/{{mantra_path}}/tags/{{mantra_id}}/",
+									"protocol": "http",
+									"host": [
+										"{{base_url_path}}"
+									],
+									"path": [
+										"{{mantra_path}}",
+										"tags",
+										"{{mantra_id}}",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Tag on Mantra",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "X-CSRFToken",
+										"value": "lw5q9pMXeG3C0jhHDiEJqzu7MmGnaPHwHEXNZ2Ytczp1Ubuxp4vu0T8zYECKiDuP"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{Token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://{{base_url_path}}/{{mantra_path}}/tags/{{mantra_id}}/",
+									"protocol": "http",
+									"host": [
+										"{{base_url_path}}"
+									],
+									"path": [
+										"{{mantra_path}}",
+										"tags",
+										"{{mantra_id}}",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Mantra",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"mantra_id\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "3t5HsbIzTvL7mK9UVl2MIXBOTYBn7EBLpBX4iOU5Ro7wgCmKH7Txihfg5gxKfso4"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quote\": \"{{quote}}\",\r\n    \"tags\": [\r\n        {\r\n            \"name\": \"{{tag_inner_peace}}\"\r\n        }\r\n    ],\r\n    \"public\":true\r\n}"
+						},
+						"url": {
+							"raw": "http://{{base_url_path}}/{{mantra_path}}/mantras/",
+							"protocol": "http",
+							"host": [
+								"{{base_url_path}}"
+							],
+							"path": [
+								"{{mantra_path}}",
+								"mantras",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Current User Mantras",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "wp0yxpUGPQbb58AoOxggxBc4n67GptSQSxSVn26cNJxAZ0NeAj717VQwzo33xhF9"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{base_url_path}}/{{mantra_path}}/mantras/",
+							"protocol": "http",
+							"host": [
+								"{{base_url_path}}"
+							],
+							"path": [
+								"{{mantra_path}}",
+								"mantras",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mantra By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "wp0yxpUGPQbb58AoOxggxBc4n67GptSQSxSVn26cNJxAZ0NeAj717VQwzo33xhF9"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{base_url_path}}/{{mantra_path}}/mantras/{{mantra_id}}/",
+							"protocol": "http",
+							"host": [
+								"{{base_url_path}}"
+							],
+							"path": [
+								"{{mantra_path}}",
+								"mantras",
+								"{{mantra_id}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mantra By Id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "wp0yxpUGPQbb58AoOxggxBc4n67GptSQSxSVn26cNJxAZ0NeAj717VQwzo33xhF9"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quote\":\"{{quote_new}}\",\r\n    \"public\":true\r\n}"
+						},
+						"url": {
+							"raw": "http://{{base_url_path}}/{{mantra_path}}/mantras/{{mantra_id}}/",
+							"protocol": "http",
+							"host": [
+								"{{base_url_path}}"
+							],
+							"path": [
+								"{{mantra_path}}",
+								"mantras",
+								"{{mantra_id}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mantra By Id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "wp0yxpUGPQbb58AoOxggxBc4n67GptSQSxSVn26cNJxAZ0NeAj717VQwzo33xhF9"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quote\":\"{{quote_new}}\",\r\n    \"public\":true\r\n}"
+						},
+						"url": {
+							"raw": "http://{{base_url_path}}/{{mantra_path}}/mantras/{{mantra_id}}/",
+							"protocol": "http",
+							"host": [
+								"{{base_url_path}}"
+							],
+							"path": [
+								"{{mantra_path}}",
+								"mantras",
+								"{{mantra_id}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mantra By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "wp0yxpUGPQbb58AoOxggxBc4n67GptSQSxSVn26cNJxAZ0NeAj717VQwzo33xhF9"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{base_url_path}}/{{mantra_path}}/mantras/{{mantra_id}}/",
+							"protocol": "http",
+							"host": [
+								"{{base_url_path}}"
+							],
+							"path": [
+								"{{mantra_path}}",
+								"mantras",
+								"{{mantra_id}}",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Playlist",
+			"item": [
+				{
+					"name": "All Current User Playlists",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "Ir6jc4l1afdJdAtrUo6z9qZbiT0wxrxX4zYG2Hxx88z87sGhGaXkJKDDubWTFfkg"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{base_url_path}}/{{playlist_path}}/playlists/",
+							"protocol": "http",
+							"host": [
+								"{{base_url_path}}"
+							],
+							"path": [
+								"{{playlist_path}}",
+								"playlists",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Playlist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"playlist_id\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "Ir6jc4l1afdJdAtrUo6z9qZbiT0wxrxX4zYG2Hxx88z87sGhGaXkJKDDubWTFfkg"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"{{playlist_title_good_vibes}}\",\r\n    \"mantras\": [],\r\n    \"description\":\"{{playlist_description}}\",\r\n    \"public\":true\r\n}"
+						},
+						"url": {
+							"raw": "http://{{base_url_path}}/{{playlist_path}}/playlists/",
+							"protocol": "http",
+							"host": [
+								"{{base_url_path}}"
+							],
+							"path": [
+								"{{playlist_path}}",
+								"playlists",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "Ir6jc4l1afdJdAtrUo6z9qZbiT0wxrxX4zYG2Hxx88z87sGhGaXkJKDDubWTFfkg"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{base_url_path}}/{{playlist_path}}/playlists/{{playlist_id}}/",
+							"protocol": "http",
+							"host": [
+								"{{base_url_path}}"
+							],
+							"path": [
+								"{{playlist_path}}",
+								"playlists",
+								"{{playlist_id}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "Ir6jc4l1afdJdAtrUo6z9qZbiT0wxrxX4zYG2Hxx88z87sGhGaXkJKDDubWTFfkg"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"{{playlist_title_calm_day}}\",\r\n    \"mantras\": [\r\n        {\r\n            \"quote\": \"{{quote}} + Test\"\r\n        },\r\n        {\r\n            \"quote\": \"{{quote_new}}\"\r\n        }\r\n    ],\r\n    \"description\":\"{{playlist_description}}\",\r\n    \"public\":true\r\n}"
+						},
+						"url": {
+							"raw": "http://{{base_url_path}}/{{playlist_path}}/playlists/{{playlist_id}}/",
+							"protocol": "http",
+							"host": [
+								"{{base_url_path}}"
+							],
+							"path": [
+								"{{playlist_path}}",
+								"playlists",
+								"{{playlist_id}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "Ir6jc4l1afdJdAtrUo6z9qZbiT0wxrxX4zYG2Hxx88z87sGhGaXkJKDDubWTFfkg"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"{{playlist_title_calm_day}}\",\r\n    \"mantras\": [\r\n        {\r\n            \"quote\": \"{{quote}}\"\r\n        },\r\n        {\r\n            \"quote\": \"{{quote_new}}\"\r\n        }\r\n    ],\r\n    \"description\":\"{{playlist_description}}\",\r\n    \"public\":true\r\n}"
+						},
+						"url": {
+							"raw": "http://{{base_url_path}}/{{playlist_path}}/playlists/{{playlist_id}}/",
+							"protocol": "http",
+							"host": [
+								"{{base_url_path}}"
+							],
+							"path": [
+								"{{playlist_path}}",
+								"playlists",
+								"{{playlist_id}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "X-CSRFToken",
+								"value": "Ir6jc4l1afdJdAtrUo6z9qZbiT0wxrxX4zYG2Hxx88z87sGhGaXkJKDDubWTFfkg"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{base_url_path}}/{{playlist_path}}/playlists/{{playlist_id}}/",
+							"protocol": "http",
+							"host": [
+								"{{base_url_path}}"
+							],
+							"path": [
+								"{{playlist_path}}",
+								"playlists",
+								"{{playlist_id}}",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Token",
+			"value": "Token aafe8edc5d218fa2f218d1eeb1d391d840a29037",
+			"type": "string"
+		},
+		{
+			"key": "email",
+			"value": "test@example.com",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "Pureblack123",
+			"type": "string"
+		},
+		{
+			"key": "user_path",
+			"value": "api/user",
+			"type": "string"
+		},
+		{
+			"key": "name",
+			"value": "Bilbo the pug",
+			"type": "string"
+		},
+		{
+			"key": "base_url_path",
+			"value": "127.0.0.1:8000",
+			"type": "string"
+		},
+		{
+			"key": "quote",
+			"value": "All we have to decide is what to do with the time that is given us.",
+			"type": "string"
+		},
+		{
+			"key": "mantra_path",
+			"value": "api/mantra",
+			"type": "string"
+		},
+		{
+			"key": "mantra_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "quote_new",
+			"value": "I create my own path and walk it with joy.",
+			"type": "string"
+		},
+		{
+			"key": "tag_inner_peace",
+			"value": "Inner Peace",
+			"type": "string"
+		},
+		{
+			"key": "tag_soul",
+			"value": "Soul",
+			"type": "string"
+		},
+		{
+			"key": "playlist_path",
+			"value": "api/playlist",
+			"type": "string"
+		},
+		{
+			"key": "playlist_title_good_vibes",
+			"value": "Good Vibes",
+			"type": "string"
+		},
+		{
+			"key": "playlist_description",
+			"value": "To have a happier day :)",
+			"type": "string"
+		},
+		{
+			"key": "playlist_title_calm_day",
+			"value": "Calm & Relaxing",
+			"type": "string"
+		},
+		{
+			"key": "playlist_id",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}
