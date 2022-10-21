@@ -1,7 +1,9 @@
 
+from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import action
 
 from core.models import Playlist
 from playlist import serializers
@@ -24,5 +26,13 @@ class PlaylistViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+    @action(detail=False, methods=['get'])
+    def public(self, request, pk=None):
+        playlists = self.queryset.filter(public=True).order_by('-id')
+        serializer = self.serializer_class(playlists, many=True)
+        return Response(serializer.data)
+
+
 
 
